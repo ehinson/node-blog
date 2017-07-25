@@ -1,0 +1,26 @@
+<footer>Node Blog &copy; 2017</footer>
+<script>
+
+  ;(function(){
+    var index;
+
+    var selects = [].slice.call(document.querySelectorAll(".form__post--select"))
+
+    var options = selects.map(elem => {
+      return [].slice.call(elem.options)
+    });
+
+    var styledSelects = [].slice.call(document.querySelectorAll(".form__custom--select"))
+
+    styledSelects.forEach(elem => {
+      elem.addEventListener("click", () => {
+        elem.classList.toggle("active")
+      })
+    });
+
+
+    console.log("Options", options);
+
+
+  })();
+</script>

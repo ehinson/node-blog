@@ -1,0 +1,21 @@
+<div class="grid__container">
+  <%if (posts){ %>
+    <% for (post in posts){ %>
+      <% console.log(post.title) %>
+
+      <a class="grid__item" href="/posts/show/<%= post._id %>">
+      <h2 class="title title--preview"><%= post.title %></h2>
+      <div class="loader"></div>
+      <span class="category"><%- post.category %></span>
+      <div class="meta meta--preview">
+        <img class="meta__avatar" src="img/authors/1.png" alt="author01" />
+        <span class="meta__date"><i class="fa fa-calendar-o"></i> <%= moment(post.date).format("DD MMMM ") %></span>
+        <span class="meta__reading-time"><i class="fa fa-clock-o"></i> 3 min read</span>
+      </div>
+    </a>
+
+  <%  } %>
+  <% } %>
+
+
+</div>

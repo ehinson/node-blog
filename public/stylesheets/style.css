@@ -1,0 +1,264 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-size: 16px;
+  background: yellow;
+  color: #333333;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+}
+
+a {
+  outline: none;
+  color: #81c483;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: #333;
+  outline: none;
+}
+button:focus {
+  outline: none;
+}
+/* NAvigation */
+nav {
+  background: #fff;
+  width: 100%;
+  line-height: 1;
+  padding: 15px 15px 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+}
+nav ul {
+  list-style-type: none;
+}
+
+nav ul li {
+  display: inline-block;
+}
+
+/* Grid */
+.post__wrapper {
+  position: relative;
+  z-index: 50;
+}
+
+.grid__container {
+  position: relative;
+}
+
+.grid__item {
+  padding: 45px 55px 30px;
+  position: relative;
+  color: inherit;
+  background: #f00;
+  min-height: 300px;
+  cursor: pointer;
+  text-align: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+/* Overlay */
+.grid::after {
+  content: '';
+  background: rgba(202, 202, 202, 0.4);
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+
+.grid__item::before {
+  position: absolute;
+  content: '';
+  top: 0px;
+  right: 55px;
+  bottom: 0px;
+  left: 55px;
+  border-bottom: 1px solid rgba(74, 74, 74, 0.075);
+}
+
+.grid__item * {
+  z-index: 10;
+}
+
+@media screen and (min-width: 900px) {
+  .grid__container {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .grid__item {
+    width: 33.33%;
+    border: none;
+  }
+
+  .grid__item::before {
+    top: 5px;
+    right: 5px;
+    bottom: 5px;
+    left: 5px;
+    border: 1px solid rgba(74, 74, 74, 0.075);
+    -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+  }
+
+  .grid__item:hover::before,
+  .grid__item:focus::before {
+    border: 3px solid rgba(129, 196, 131, 0.5);
+  }
+}
+@media screen and (min-width: 1200px) {
+  .grid__item {
+    width: 25%;
+  }
+}
+@media screen and (min-width: 1500px) {
+  .grid__item {
+    width: 25%;
+  }
+}
+@media screen and (min-width: 1800px) {
+  .grid__item {
+    width: 20%;
+  }
+}
+@media screen and (min-width: 2100px) {
+  /* 6 columns */
+  .grid__item {
+    width: 16.66%;
+  }
+}
+
+/* Custom Select */
+
+.form__custom--select {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  text-align: left;
+  background: #fff;
+  z-index: 100;
+  width: 100%;
+  max-width: 400px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.form__custom--select:focus {
+  outline: none;
+}
+.form__custom--select select {
+  display: none;
+}
+.form__custom--select span {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  padding: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.form__custom--select > span {
+  padding-right: 3em;
+}
+
+.form__custom--select > span:after,
+.form__custom--select .form__select--selected span:after {
+  speak: none;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.form__custom--select > span:after {
+  content: 'Hi there';
+  right: 1em;
+}
+.form__custom--select .form__select--selected span:after {
+  content: 'Bye there';
+  margin-left: 1em;
+}
+
+.form__custom--select.active > span:after {
+  -webkit-transform: translateY(-50%) rotate(180deg);
+  transform: translateY(-50%) rotate(180deg);
+}
+div.form__custom--select.active {
+  z-index: 200;
+}
+
+/* Options */
+.form__custom--select .options {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  background: #fff;
+  visibility: hidden;
+}
+
+.form__custom--select.active .options {
+  visibility: visible;
+}
+
+.form__custom--select ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.form__custom--select ul span {
+  padding: 1em;
+}
+
+.form__custom--select ul li.focus span {
+  background-color: #ddd;
+}
+
+/* Optgroup and optgroup label */
+.form__custom--select li.optgroup ul {
+  padding-left: 1em;
+}
+
+.form__custom--select li.optgroup > span {
+  cursor: default;
+}

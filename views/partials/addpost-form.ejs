@@ -1,0 +1,63 @@
+<form action="/posts/add" method="post" enctype="multipart/form-data" class="form form__post">
+  <span class="form__post--label">
+    <label for="name"><span class="form__post--before">Post Title</span><span class="form__post--label--content">Post Title (required) </span></label><br/>
+  <input type="text" name="name" id="name" value="" class=" form__post--input">
+  </span>
+
+  <br>
+  <span class="form__post--label">
+    <label for="category"><span class="form__post--before">Category</span><span class="form__post--label--content">Category (required) </span></label><br/>
+    <div class="form__custom--select" id="author">
+    <span class="placeholder">Placeholder</span>
+    <div class="options">
+    <ul>
+    			<li data-option data-value="1" class="form__select--selected"><span>Option 1</span></li>
+    			<li data-option data-value="2"><span>Option 2</span></li>
+    			<li data-option data-value="3"><span>Option 3</span></li>
+    		</ul>
+        </div>
+    <select class="form__post--select">
+      <option value="" disabled selected>Choose your option</option>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </select>
+    </div>
+  </span>
+
+  <br>
+  <span class="form__post--label">
+    <label for="author"><span class="form__post--before">Author</span><span class="form__post--label--content">Author (required) </span></label><br/>
+    <div class="form__custom--select" id="author">
+    <span class="placeholder">Placeholder</span>
+    <div class="options">
+    <ul>
+    			<li data-option data-value="1" class="form__select--selected"><span>Option 1</span></li>
+    			<li data-option data-value="2"><span>Option 2</span></li>
+    			<li data-option data-value="3"><span>Option 3</span></li>
+    		</ul>
+        </div>
+    <select class="form__post--select">
+      <option value="" disabled selected>Choose your option</option>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </select>
+    </div>
+  </span>
+
+  <br>
+  <span class="form__post--label">
+        <label for="password">
+          <span class="form__post--before">Body</span>
+  <span class="form__post--label--content">Body (required) </span></label><br/>
+  <input type="password" name="password" id="password" value="" class=" form__post--input">
+  </span>
+<br>
+  <label for="image--upload" class="form__image--upload--label">
+
+<span class="form__post--file--content">Upload Profile Image </span></label>
+  <input type="file" name="image--upload" value="" class=" post__file--upload">
+  <br><br>
+  <input type="submit" value="Post" class="button post__submit">
+</form>
