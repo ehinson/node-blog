@@ -26,8 +26,9 @@ router.post('/add', upload.single('image--upload'), function(req, res, next) {
   var title = req.body.title;
   var author = req.body.author;
   var category = req.body.category;
-  var body = req.body.body;
+  var body = JSON.stringify(req.body.body);
   var date = new Date();
+  console.log(req.body);
   if (req.file) {
     var mainimage = req.file.filename;
   } else {
@@ -41,11 +42,12 @@ router.post('/add', upload.single('image--upload'), function(req, res, next) {
   var errors = req.getValidationResult().then(result => {
     if (!result.isEmpty()) {
       res.render('addpost', {
+        title: 'Error',
         errors
       });
     } else {
       var posts = db.get('posts');
-      posts.insert({ title: title, author: author, category, date, mainimage }, (err, post) => {
+      posts.insert({ title, author, category, date, mainimage, body }, (err, post) => {
         if (err) {
           res.send(err);
         } else {

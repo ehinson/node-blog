@@ -262,3 +262,8 @@ div.form__custom--select.active {
 .form__custom--select li.optgroup > span {
   cursor: default;
 }
+/* Text Editor */
+#editor,
+.ql-toolbar {
+  max-width: 400px;
+}

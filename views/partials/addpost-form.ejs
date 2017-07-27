@@ -1,7 +1,7 @@
 <form action="/posts/add" method="post" enctype="multipart/form-data" class="form form__post">
   <span class="form__post--label">
     <label for="title"><span class="form__post--before">Post Title</span><span class="form__post--label--content">Post Title (required) </span></label><br/>
-  <input type="text" name="title" id="title" value="" class=" form__post--input">
+  <input type="text" name="title" id="title" value="" class="form__post--input">
   </span>
 
   <br>
@@ -11,7 +11,7 @@
     <span class="placeholder">Choose a Category</span>
     <div class="options">
     <ul>
-      <% if (categories) { %>
+      <% if (categories !== undefined) { %>
         <% for( cat in categories){ %>
   <li data-option data-value="<%= categories[cat].name %>" ><span><%= categories[cat].name %></span></li>
 
@@ -55,7 +55,8 @@
         <label for="body">
           <span class="form__post--before">Body</span>
   <span class="form__post--label--content">Body (required) </span></label><br/>
-  <div id="editor">
+  <input name="body" type="hidden">
+  <div id="editor" >
 <p>Hello World!</p>
 <p>Some initial <strong>bold</strong> text</p>
 <p><br></p>
