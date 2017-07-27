@@ -3,24 +3,82 @@
 
   ;(function(){
     var index;
+    var isOpen;
+    var activeSelect;
+
+    var styledSelects = [].slice.call(document.querySelectorAll(".form__custom--select"))
 
     var selects = [].slice.call(document.querySelectorAll(".form__post--select"))
 
+    var styledOptions = styledSelects.map(elem => {
+      return [].slice.call(elem.querySelectorAll("li[data-option]"))
+    })
     var options = selects.map(elem => {
       return [].slice.call(elem.options)
     });
 
-    var styledSelects = [].slice.call(document.querySelectorAll(".form__custom--select"))
+    document.addEventListener('click', () => {
+      if (isOpen){
+        if (activeSelect){
+          toggleSelects(activeSelect)
+
+        }
+      }
+    })
 
     styledSelects.forEach(elem => {
-      elem.addEventListener("click", () => {
-        elem.classList.toggle("active")
+      elem.addEventListener("click", (e)=> {
+      e.stopPropagation()
+        toggleSelects(elem)
       })
     });
 
 
-    console.log("Options", options);
+    styledOptions.forEach((elem, index) => elem.forEach(el  => el.addEventListener("click", (e)=> {
+      // e.stopPropagation();
+      chooseOption(el, index)
+    })))
 
+    function toggleSelects(elem){
+      if (elem.classList.contains("active")){
+        elem.classList.remove("active")
+        isOpen = false;
+        activeSelect = false;
+      }
+      else{
+        elem.classList.add("active")
+        isOpen = true;
+        activeSelect = elem;
+      }
+      setZIndexes()
+
+    }
+    function chooseOption(el, idx){
+      styledOptions[idx].forEach(elem => {
+        elem.classList.remove("form__select--selected")
+      });
+      console.log(el.textContent);
+      el.classList.add("form__select--selected")
+      let option = options[idx].find(option => option.textContent === el.textContent)
+      option.value = el.textContent;
+      option.selected = true;
+      let placeholder = document.querySelectorAll('.placeholder')[idx]
+      placeholder.innerHTML = el.textContent
+    }
+
+
+
+
+    function setZIndexes() {
+    		for (var j = 0; j < styledSelects.length; j++) {
+    			styledSelects[j].style.zIndex = '1';
+    		}
+
+    		var openSelect = document.querySelectorAll('.form__custom--select.active');
+    		if (openSelect.length > 0) {
+    			openSelect[0].style.zIndex = '99';
+    		}
+    	}
 
   })();
 </script>

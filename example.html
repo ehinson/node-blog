@@ -1,0 +1,64 @@
+<style>
+*{
+  box-sizing: border-box;
+}
+.outest{
+    position: relative;
+    display: flex;
+    background-color: lightblue;
+    border: 1px solid lightblue;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    height: 50%;
+}
+.outest p, .outer p{
+    position: absolute;
+    top: 0;
+    transform: translateX(calc(50% - 1em));
+
+}
+.outer{
+    position: relative;
+  display: flex;
+  height: 50%;
+  background-color: orange;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.inner{
+    position: relative;
+    display: flex;
+    background-color: orange;
+    border: 1px solid blue;
+    height: 50%;
+    width: 50%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+</style>
+
+<div class="outest">
+  <p>Test</p>
+  <div class="outer">Test
+    <div class="inner">TEst</div>
+  </div>
+</div>
+
+<script>
+// Add your javascript here
+var divs = document.querySelectorAll('div');
+divs.forEach(elem => {
+  elem.addEventListener('click', e => {
+    e.stopPropagation();
+    alert(e.currentTarget.textContent);
+  });
+});
+</script>
