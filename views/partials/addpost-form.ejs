@@ -8,13 +8,12 @@
   <span class="form__post--label">
     <label for="category"><span class="form__post--before">Category</span><span class="form__post--label--content">Category (required) </span></label><br/>
     <div class="form__custom--select" id="author">
-    <span class="placeholder">Placeholder</span>
+    <span class="placeholder">Choose a Category</span>
     <div class="options">
     <ul>
       <% if (categories) { %>
-        <% console.log(categories) %>
         <% for( cat in categories){ %>
-  <li data-option data-value="<%= categories[cat].name %>" class="form__select--selected"><span><%= categories[cat].name %></span></li>
+  <li data-option data-value="<%= categories[cat].name %>" ><span><%= categories[cat].name %></span></li>
 
       <%  } %>
       <%} %>
@@ -22,7 +21,6 @@
         </div>
     <select name="category" class="form__post--select">
       <% if (categories) { %>
-        <% console.log(categories) %>
         <% for( cat in categories){ %>
       <option value="<%= categories[cat].name %>"><%= categories[cat].name %></option>
       <%  } %>
@@ -57,7 +55,11 @@
         <label for="body">
           <span class="form__post--before">Body</span>
   <span class="form__post--label--content">Body (required) </span></label><br/>
-  <textarea name="body" id="body" value="" class=" form__post--input"></textarea>
+  <div id="editor">
+<p>Hello World!</p>
+<p>Some initial <strong>bold</strong> text</p>
+<p><br></p>
+</div>
   </span>
 <br>
   <label for="image--upload" class="form__image--upload--label">
