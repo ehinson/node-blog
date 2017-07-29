@@ -4,6 +4,22 @@ var router = express.Router();
 const mongo = require('mongodb');
 var db = require('monk')('mongodb://localhost/nodeblog');
 
+
+/* GET categories/add listing. */
+router.get('/show/:category', function(req, res, next) {
+  var posts = db.get('posts');
+  posts.find({category: req.params.category}, {}, (err, posts) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.render('index', {
+        title: req.params.category,
+        posts: posts
+      });
+    }
+  });
+});
+
 /* GET categories/add listing. */
 router.get('/add', function(req, res, next) {
   res.render('addcategory', {
@@ -11,7 +27,7 @@ router.get('/add', function(req, res, next) {
   });
 });
 
-/* POST posts/add listing. */
+/* POST categories/add listing. */
 router.post('/add', function(req, res, next) {
   var name = req.body.name;
 

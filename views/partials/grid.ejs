@@ -1,15 +1,15 @@
 <div class="grid__container">
   <%if (posts !== undefined){ %>
     <% for (p in posts){ %>
-      <a class="grid__item" href="/posts/show/<%= posts[p]._id %>" data-image="images/<%= posts[p].mainimage %>" style="background-image: url(images/<%= posts[p].mainimage %>) ">
-      <p class="snippet"><%= truncateText(JSON.stringify(posts[p].body), 50) %></p>
+      <span class="grid__item" href="/posts/show/<%= posts[p]._id %>" data-image="images/<%= posts[p].mainimage %>" style="background-image: url(/images/uploads/<%= posts[p].mainimage %>) ">
+      <p class="snippet"><%= truncateText(JSON.stringify(posts[p].body), 100) %></p>
       <h2 class="title title--preview"><%= posts[p].title %></h2>
       <div class="loader"></div>
-      <span class="category"><%= posts[p].category %></span>
+      <span class="category"><a href="/categories/show/<%= posts[p].category %>"><%= posts[p].category %></a></span>
       <div class="meta meta--preview">
         <span class="meta__date"><i class="fa fa-calendar-o"></i> <%= moment(posts[p].date).format("DD MMMM ") %></span>
       </div>
-    </a>
+    </span>
 
   <%  } %>
   <% } %>
