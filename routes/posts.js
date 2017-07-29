@@ -7,6 +7,22 @@ var upload = multer({ dest: 'public/images/uploads/' });
 const mongo = require('mongodb');
 var db = require('monk')('mongodb://localhost/nodeblog');
 
+
+/* GET posts/show/:id listing. */
+router.get('/show/:id', function(req, res, next) {
+  var posts = db.get('posts');
+  posts.findById(req.params.id, (err, post) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.render('show', {
+        title: 'Add a Post',
+        post
+      });
+    }
+  });
+});
+
 /* GET posts/add listing. */
 router.get('/add', function(req, res, next) {
   var categories = db.get('categories');
