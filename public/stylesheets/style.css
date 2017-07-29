@@ -5,10 +5,11 @@
 html,
 body {
   font-size: 16px;
-  background: yellow;
+  background: white;
   color: #333333;
   margin: 0;
   padding: 0;
+  font-family: 'Zilla Slab', serif ;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
@@ -33,20 +34,55 @@ nav {
   background: #fff;
   width: 100%;
   line-height: 1;
-  padding: 15px 15px 10px;
+  padding: 0 0 10px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  min-height: 80px;
   -webkit-align-items: center;
   align-items: center;
+  justify-content: flex-end;
+  position: relative;
 }
 nav ul {
   list-style-type: none;
+  margin: 0;
+  height: 100%;
 }
 
 nav ul li {
   display: inline-block;
+  padding: 15px;
+  min-width: 150px;
+  min-height: 80px;
+  border-left: 1px solid rgba(202, 202, 202, 0.4);
+}
+nav ul li a,
+nav img {
+  position: relative;
+  z-index: 21;
+}
+
+nav .fa, nav h1 {
+  font-size: 2em;
+  align-self: flex-start;
+}
+nav .fa {
+  padding: 15px;
+}
+nav h1 {
+  margin-right: auto;
+}
+
+
+.nav-overlay {
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(0deg, #ffffff, rgba(255, 255, 255, 0));
+  width: 100%;
+  height: 100%;
+  z-index: 20;
 }
 
 /* Grid */
@@ -63,8 +99,9 @@ nav ul li {
   padding: 45px 55px 30px;
   position: relative;
   color: inherit;
-  background: #f00;
+  background: #fff;
   min-height: 300px;
+  background-size: cover;
   cursor: pointer;
   text-align: center;
   display: -webkit-box;
@@ -78,10 +115,12 @@ nav ul li {
   flex-direction: column;
   -webkit-justify-content: center;
   justify-content: center;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
 /* Overlay */
-.grid::after {
+.grid:after {
   content: '';
   background: rgba(202, 202, 202, 0.4);
   opacity: 0;
@@ -91,13 +130,15 @@ nav ul li {
   left: 0;
   width: 100%;
   height: 100%;
-  -webkit-transition: opacity 0.5s;
-  transition: opacity 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
-.grid__item::before {
+.grid__item:before {
   position: absolute;
   content: '';
+  background-color: white;
+  opacity: 0.85;
   top: 0px;
   right: 55px;
   bottom: 0px;
@@ -107,6 +148,55 @@ nav ul li {
 
 .grid__item * {
   z-index: 10;
+}
+
+.grid__item h2 {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 1em 30px;
+  word-spacing: -0.15em;
+  font-weight: 300;
+}
+.grid__item p {
+  width: 50%;
+  padding: 1em 10px 0 0;
+  position: absolute;
+  top: 0;
+  border-right: 1px solid rgba(202, 202, 202, 0.4);
+  text-align: right;
+  opacity: 0;
+  -webkit-transition: all 0.35s;
+  transition: all 0.35s;
+  -webkit-transform: translate3d(-40px, 0, 0);
+  transform: translate3d(-40px, 0, 0);
+  letter-spacing: 1px;
+  font-size: 78.5%;
+}
+.grid__item .category {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 1em 30px;
+}
+.grid__item .meta__date {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 1em 30px;
+}
+
+.grid__item:hover {
+  opacity: 0.95;
+  -webkit-transform: translate3d(0, 0, 0) scale(1);
+  transform: translate3d(0, 0, 0) scale(1);
+  z-index: 11;
+}
+
+.grid__item:hover p {
+  opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 @media screen and (min-width: 900px) {
@@ -161,6 +251,85 @@ nav ul li {
   }
 }
 
+/* Registration Form */
+.form {
+  max-width: 400px;
+  display: block;
+  margin: auto;
+}
+.form__post--label {
+  position: relative;
+  /*z-index: 1;*/
+  display: inline-block;
+  margin: 1em;
+  max-width: 400px;
+  width: calc(100% - 2em);
+  vertical-align: top;
+  background: #fff;
+
+}
+.form__post--input:focus {
+box-shadow: 0px 0px 0px 2px rgba(129, 196, 131, 0.5);
+}
+
+.form__post label {
+  display: inline-block;
+  float: right;
+  padding: 0 1em;
+  width: 40%;
+  color: #6a7989;
+  font-weight: bold;
+  font-size: 0.9em;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: absolute;
+  width: 100%;
+  text-align: left;
+  pointer-events: none;
+  color: #d2d2d2;
+}
+
+.form__post--input {
+  position: relative;
+  display: block;
+  float: right;
+  padding: 1em;
+  width: 60%;
+  border: none;
+  border-radius: 0;
+  background: #f0f0f0;
+  font-weight: 300;
+  font-size: 16px;
+  -webkit-appearance: none;
+  width: 100%;
+  font-family: 'Zilla Slab', serif ;
+  color: #6a7989;
+}
+
+.form__post--input:focus {
+  outline: none;
+}
+
+@-webkit-keyframes anim-shadow {
+	to {
+		box-shadow: 0px 0px 100px 50px;
+    	opacity: 0;
+	}
+}
+
+@keyframes anim-shadow {
+	to {
+		box-shadow: 0px 0px 100px 50px;
+    	opacity: 0;
+	}
+}
+
+
+
 /* Custom Select */
 
 .form__custom--select {
@@ -168,8 +337,9 @@ nav ul li {
   vertical-align: middle;
   position: relative;
   text-align: left;
-  background: #fff;
-  z-index: 100;
+  background: #f0f0f0;
+  color: #6a7989;
+  z-index: 50;
   width: 100%;
   max-width: 400px;
   -webkit-touch-callout: none;
@@ -224,14 +394,16 @@ nav ul li {
 }
 div.form__custom--select.active {
   z-index: 200;
+
 }
 
 /* Options */
 .form__custom--select .options {
   position: absolute;
   overflow: hidden;
+  z-index: inherit;
   width: 100%;
-  background: #fff;
+  background: #f0f0f0;
   visibility: hidden;
 }
 
@@ -262,6 +434,7 @@ div.form__custom--select.active {
 .form__custom--select li.optgroup > span {
   cursor: default;
 }
+
 /* Text Editor */
 #editor,
 .ql-toolbar {

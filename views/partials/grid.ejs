@@ -1,14 +1,13 @@
 <div class="grid__container">
   <%if (posts !== undefined){ %>
     <% for (p in posts){ %>
-      <a class="grid__item" href="/posts/show/<%= posts[p]._id %>">
+      <a class="grid__item" href="/posts/show/<%= posts[p]._id %>" data-image="images/<%= posts[p].mainimage %>" style="background-image: url(images/<%= posts[p].mainimage %>) ">
+      <p class="snippet"><%= truncateText(JSON.stringify(posts[p].body), 50) %></p>
       <h2 class="title title--preview"><%= posts[p].title %></h2>
       <div class="loader"></div>
       <span class="category"><%= posts[p].category %></span>
       <div class="meta meta--preview">
-        <img class="meta__avatar" src="img/authors/1.png" alt="author01" />
         <span class="meta__date"><i class="fa fa-calendar-o"></i> <%= moment(posts[p].date).format("DD MMMM ") %></span>
-        <span class="meta__reading-time"><i class="fa fa-clock-o"></i> 3 min read</span>
       </div>
     </a>
 

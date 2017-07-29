@@ -3,6 +3,7 @@ var router = express.Router();
 const multer = require('multer');
 var upload = multer({ dest: 'uploads/' });
 
+
 const mongo = require('mongodb');
 var db = require('monk')('mongodb://localhost/nodeblog');
 
@@ -28,9 +29,9 @@ router.post('/add', upload.single('image--upload'), function(req, res, next) {
   var category = req.body.category;
   var body = JSON.stringify(req.body.body);
   var date = new Date();
-  console.log(req.body);
+  console.log(req.file);
   if (req.file) {
-    var mainimage = req.file.filename;
+    var mainimage = req.file.originalname;
   } else {
     var mainimage = 'no-image.jpg';
   }
