@@ -17,7 +17,7 @@ router.get('/show/:id', function(req, res, next) {
     } else {
       res.render('show', {
         title: 'Add a Post',
-        post
+        post: post
       });
     }
   });
@@ -71,6 +71,60 @@ router.post('/add', upload.single('image--upload'), function(req, res, next) {
           req.flash('success', 'Post Added');
           res.location('/');
           res.redirect('/');
+        }
+      });
+    }
+  });
+});
+
+/* POST posts/addcomment listing. */
+router.post('/addcomment', function(req, res, next) {
+
+  var name = req.body.comment__name;
+  var postid = req.body.post__id;
+  var email = req.body.comment__email;
+  var body = req.body.comment__body;
+  var date = new Date();
+   console.log(req.body);
+
+  //Validation
+  req.checkBody('comment__name', 'Name is required').notEmpty();
+  req.checkBody('comment__email', 'Email is required but never displayed').notEmpty();
+  req.checkBody('comment__email', 'Email is not valid').isEmail();
+
+  var errors = req.getValidationResult().then(result => {
+    if (!result.isEmpty()) {
+      var posts = db.get('posts');
+      posts.findById(postid, (err, post) => {
+        if (err) {
+          console.error("Error finding by One", err)
+        } else {
+          console.log("Showing with errors", result.array());
+          res.render('show', {
+            title: 'Add a Post',
+            errors: result.array(),
+            post: post
+          });
+        }
+      });
+
+    } else {
+      var comment = {
+        name: name,
+        email: email,
+        body: body,
+        commentdate: date
+      }
+      var posts = db.get('posts');
+      posts.update({ _id: postid }, { $push : {
+        "comments": comment
+      }}, (err, res) => {
+        if (err) {
+          throw err;
+        } else {
+          req.flash('success', 'Comment Added');
+          res.location('/posts/show/'+ postid);
+          res.redirect('/posts/show/'+ postid);
         }
       });
     }

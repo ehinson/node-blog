@@ -1,12 +1,12 @@
 <form action="/posts/add" method="post" enctype="multipart/form-data" class="form form__post">
   <span class="form__post--label">
-    <label for="title"><span class="form__post--before">Post Title</span><span class="form__post--label--content">Post Title (required) </span></label><br/>
+    <label for="title"><span class="form__post--label--content">Post Title (required) </span></label><br/>
   <input type="text" name="title" id="title" value="" class="form__post--input">
   </span>
 
   <br>
   <span class="form__post--label">
-    <label for="category"><span class="form__post--before">Category</span><span class="form__post--label--content">Category (required) </span></label><br/>
+    <label for="category"><span class="form__post--label--content">Category  </span></label><br/>
     <div class="form__custom--select" id="author">
     <span class="placeholder">Choose a Category</span>
     <div class="options">
@@ -31,7 +31,7 @@
 
   <br>
   <span  class="form__post--label">
-    <label for="author"><span class="form__post--before">Author</span><span class="form__post--label--content">Author (required) </span></label><br/>
+    <label for="author"><span class="form__post--label--content">Author  </span></label><br/>
     <div class="form__custom--select" id="author">
     <span class="placeholder">Placeholder</span>
     <div class="options">
@@ -53,7 +53,7 @@
   <br>
   <span class="form__post--label">
         <label for="body">
-          <span class="form__post--before">Body</span>
+
   <span class="form__post--label--content">Body (required) </span></label><br/>
   <input name="body" type="hidden">
   <div id="editor" >
@@ -66,8 +66,8 @@
 <span class="form__post--label">
   <label for="image--upload" class="form__image--upload--label">
 
-<span class="form__post--file--content">Upload Profile Image </span></label>
-  <input type="file" name="image--upload" id="image--upload" value="" class=" post__file--upload"></span>
+<span class="form__post--file--content">Upload Profile Image </span>
+  <input type="file" name="image--upload" id="image--upload" value="" class=" post__file--upload"></span></label>
   <br><br>
   <input type="submit" value="Post" class="button post__submit">
 </form>

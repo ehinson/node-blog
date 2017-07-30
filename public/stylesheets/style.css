@@ -278,6 +278,7 @@ nav h1 {
   padding: 1em 45px;
   word-spacing: -0.15em;
   font-weight: 300;
+
 }
 .grid__item h2 a{
   color: inherit;
@@ -610,6 +611,9 @@ div.form__custom--select.active {
   margin-bottom: 50px;
 	overflow: hidden;
 	transform: translate3d(0, 0, 0);
+}
+.post__container--single h2{
+  margin-top: 50px;
 }
 
 .post__container--single .meta{

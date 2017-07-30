@@ -1,9 +1,16 @@
-<form action="/posts/addcomment" method="post" enctype="multipart/form-data" class="form form__post">
-  <input name="body" type="hidden">
+<%# error handling is good %>
+
+  <h2 class="title title--preview">Add a Comment</h2>
+<form action="/posts/addcomment" method="post"  class="form form__post">
+  <input name="post__id" type="hidden" value="<%=post._id %>">
 
   <span class="form__post--label">
-    <label for="title"><span class="form__post--before">Post Id</span><span class="form__post--label--content">Post Title (required) </span></label><br/>
-  <input type="text" name="title" id="title" value="" class="form__post--input">
+    <label for="comment__name"><span class="form__post--label--content"> Name</span></label><br/>
+  <input type="text" name="comment__name" id="comment__name" value="" class="form__post--input">
+  </span>
+  <span class="form__post--label">
+    <label for="comment__email"><span class="form__post--label--content"> Email</span></label><br/>
+  <input type="text" name="comment__email" id="comment__email" value="" class="form__post--input">
   </span>
 
   <br>
@@ -11,36 +18,12 @@
 
 
   <span class="form__post--label">
-        <label for="body">
-          <span class="form__post--before">Body</span>
-  <span class="form__post--label--content">Body (required) </span></label><br/>
-  <input name="body" type="hidden">
-  <div id="comment">
-    <p>Hello World!</p>
-    <p>Some initial <strong>bold</strong> text</p>
-    <p><br></p>
-  </div>
+        <label for="comment__body">
+  <span class="form__post--label--content">Comment </span></label><br/>
+  <textarea name="comment__body"  class="form__post--input" ></textarea>
+
   </span>
   <br>
 
-  <input type="submit" value="Post" class="button post__submit">
+  <input type="submit" value="Comment" class="button post__submit">
 </form>
-<!-- Include the Quill library -->
-<script src="https://cdn.quilljs.com/1.3.0/quill.js"></script>
-
-<!-- Initialize Quill editor -->
-<script>
-  var quill = new Quill('#comment', {
-    theme: 'snow'
-  });
-  var form = document.querySelector('form');
-  form.onsubmit = function() {
-    // Populate hidden form on submit
-    var body = document.querySelector('input[name=body]');
-    // body.value = JSON.stringify(quill.getContents());
-    body.value = document.querySelector('#comment').innerHTML;
-    console.log("Submitted", $(form).serialize(), $(form).serializeArray());
-
-    return false;
-  };
-</script>

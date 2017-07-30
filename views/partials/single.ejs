@@ -17,11 +17,12 @@
       </span>
       <%if (post.comments !== undefined){ %>
 
-        <% for (c in comments){ %>
+        <% for (c in post.comments) { %>
           <hr/>
           <div class="comment__container">
-            <span class="comment__name"><%= c.name %></span>
-            <span class="comment__body"><%= c.body %></span>
+
+            <span class="comment__body">"<%= post.comments[c].body %>"</span><br/>
+            <span class="comment__name"><strong><%= post.comments[c].name %></strong></span>
           </div>
 
           <% } %>
