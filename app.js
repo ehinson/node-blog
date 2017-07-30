@@ -8,7 +8,7 @@ const session = require('express-session');
 const multer = require('multer');
 const expressValidator = require('express-validator');
 const mongo = require('mongodb');
-var db = require('monk')('mongodb://localhost/nodeblog');
+var db = require('monk')(MONGODB_URI || 'mongodb://localhost/nodeblog');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
