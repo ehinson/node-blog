@@ -5,7 +5,7 @@ var upload = multer({ dest: 'public/images/uploads/' });
 
 
 const mongo = require('mongodb');
-var db = require('monk')(MONGODB_URI || 'mongodb://localhost/nodeblog');
+var db = require('monk')( process.env.MONGODB_URI || 'mongodb://localhost/nodeblog');
 
 
 /* GET posts/show/:id listing. */
