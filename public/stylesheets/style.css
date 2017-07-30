@@ -199,6 +199,9 @@ nav h1 {
       /*right: 0;*/
       transform: translateX(0);
   }
+  nav .menu__slide.open .menu__links li{
+      display: flex;
+  }
 }
 
 /* Grid */
