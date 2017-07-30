@@ -2,7 +2,7 @@
   <%if (posts !== undefined){ %>
     <% for (p in posts){ %>
       <span class="grid__item"  data-image="images/<%= posts[p].mainimage %>" style="background-image: url(/images/uploads/<%= posts[p].mainimage %>) ">
-      <p class="snippet"><%= truncateText(JSON.stringify(posts[p].body), 100) %></p>
+      <div class="snippet"><%-truncateText(JSON.parse(posts[p].body), 100) %></div>
       <h2 class="title title--preview"><a href="/posts/show/<%= posts[p]._id %>"><%= posts[p].title %></a></h2>
       <div class="loader"></div>
       <span class="category"><a href="/categories/show/<%= posts[p].category %>"><%= posts[p].category %></a></span>

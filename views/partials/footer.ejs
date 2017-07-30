@@ -1,4 +1,6 @@
-<footer>Node Blog &copy; 2017</footer>
+<footer>Node Blog &copy;<%= new Date().getFullYear() %></footer>
+
+
 
 <script>
 
@@ -18,6 +20,19 @@
     var options = selects.map(elem => {
       return [].slice.call(elem.options)
     });
+    var menu = document.querySelector('.menu__slide');
+    let menuButton = document.querySelector('.menu__toggle');
+    let buttons = document.querySelectorAll('input.button');
+
+    buttons.forEach(elem => {
+      elem.addEventListener('click', ()=> {
+        console.log(elem);
+      })
+    });
+
+    menuButton.addEventListener('click', () => {
+      menu.classList.toggle("open");
+    })
 
     document.addEventListener('click', () => {
       if (isOpen){

@@ -1,19 +1,48 @@
-  <% if (post !== undefined){ %>
-<div class="grid__container" style="background-image: url(/images/uploads/<%= post.mainimage %>) ">
+<% if (post !== undefined){ %>
+  <div class="post__container" style="background-image: url(/images/uploads/<%= post.mainimage %>) ">
 
 
-      <div class="post__container" href="/posts/show/<%= post._id %>" data-image="images/<%= post.mainimage %>" style="background: white; width : 50%; height :100%;">
-  <h2 class="title title--preview"><%= post.title %></h2>
-  <span class="category"><a href="/categories/show/<%= post.category %>"><%= post.category %></a></span>
-  <div class="meta meta--preview">
-    <span class="meta__date"><i class="fa fa-calendar-o"></i> <%= moment(post.date).format("DD MMMM ") %></span>
-  </div>
-      <p class="post__body"><%= JSON.stringify(post.body) %></p>
+    <div class="post__container--single" href="/posts/show/<%= post._id %>" data-image="images/<%= post.mainimage %>" >
+      <h2 class="title title--preview"><%= post.title %></h2>
+
+      <div class="meta">
+      <span class="category"><a href="/categories/show/<%= post.category %>"><%= post.category %></a></span><br>
+        <span class="meta__date"><i class="fa fa-calendar-o"></i> <%= moment(post.date).format("DD MMMM ") %></span>
+      </div>
+      <p class="post__body">
+        <%-  JSON.parse(post.body) %>
+      </p>
 
 
-    </span>
+      </span>
+      <%if (post.comments !== undefined){ %>
+
+        <% for (c in comments){ %>
+          <hr/>
+          <div class="comment__container">
+            <span class="comment__name"><%= c.name %></span>
+            <span class="comment__body"><%= c.body %></span>
+          </div>
+
+          <% } %>
+
+            <%  } %>
+              <% include ./comment-form %>
 
 
+    </div>
+    </div>
 
-</div>
-  <%  } %>
+              <% } %>
+
+<script>
+;(function ready(fn) {
+if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
+  fn();
+} else {
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.post__container').classList.add("transform");
+  });
+}
+})();
+</script>

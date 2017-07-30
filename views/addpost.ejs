@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
-<% include ./partials/head %>
-  </head>
-  <body>
-    <%- messages() %>
+
+<head>
+  <% include ./partials/head %>
+</head>
+
+<body>
+
     <div class="container">
       <% include ./partials/navbar %>
-      <div class="post__wrapper">
+        <div class="post__wrapper">
+          <%- messages() %>
 
-        <% include ./partials/addpost-form %>
+          <% include ./partials/addpost-form %>
 
-      </div>
+        </div>
     </div>
 
     <% include ./partials/footer %>
-  </body>
+</body>
+
 </html>

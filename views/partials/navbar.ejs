@@ -1,11 +1,20 @@
 
 <nav>
   <i class="fa fa-commenting-o" aria-hidden="true"></i>
-  <h1>nodeblog</h2>
-  <ul>
+  <h1 class="hidden-sm">nodeblog</h2>
+  <ul class="hidden-sm">
     <li><a href="/">Home</a></li>
     <li><a href="/posts/add">Add Post</a></li>
     <li><a href="/categories/add">Add Category</a></li>
   </ul>
-  <div class="nav-overlay"></div>
+  <div class="nav-overlay hidden-sm"></div>
+
+  <div class="menu__slide hidden-lg">
+    <ul class="menu__links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/posts/add">Add Post</a></li>
+      <li><a href="/categories/add">Add Category</a></li>
+    </ul>
+  </div>
+    <i class="fa fa-bars hidden-lg menu__toggle" aria-hidden="true" onclick="show()"></i>
 </nav>

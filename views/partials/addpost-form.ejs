@@ -63,10 +63,11 @@
 </div>
   </span>
 <br>
+<span class="form__post--label">
   <label for="image--upload" class="form__image--upload--label">
 
 <span class="form__post--file--content">Upload Profile Image </span></label>
-  <input type="file" name="image--upload" id="image--upload" value="" class=" post__file--upload">
+  <input type="file" name="image--upload" id="image--upload" value="" class=" post__file--upload"></span>
   <br><br>
   <input type="submit" value="Post" class="button post__submit">
 </form>
@@ -83,7 +84,7 @@ form.onsubmit = function() {
 // Populate hidden form on submit
 var body = document.querySelector('input[name=body]');
 // body.value = JSON.stringify(quill.getContents());
-body.value = document.querySelector('#editor').innerHTML;
+body.value = document.querySelector('.ql-editor').innerHTML;
 console.log("Submitted", $(form).serialize(), $(form).serializeArray());
 
 return false;
