@@ -1,8 +1,8 @@
 <div class="grid__container">
-  
+
   <%if (posts !== undefined){ %>
     <% for (p in posts){ %>
-      <span class="grid__item"  data-image="images/<%= posts[p].mainimage %>" style="background-image: url(/images/uploads/<%= posts[p].mainimage %>) ">
+      <span class="grid__item"  data-image="images/<%= posts[p].mainimage %>" style="background-image: url('https://s3.amazonaws.com/bloggerin/<%=posts[p].mainimage %>') ">
       <div class="snippet"><%-truncateText(JSON.parse(posts[p].body), 100) %></div>
       <h2 class="title title--preview"><a href="/posts/show/<%= posts[p]._id %>"><%= posts[p].title %></a></h2>
       <div class="loader"></div>

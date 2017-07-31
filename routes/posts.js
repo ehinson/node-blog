@@ -1,11 +1,46 @@
+var aws = require('aws-sdk')
+
 var express = require('express');
 var router = express.Router();
 const multer = require('multer');
-var upload = multer({ dest: 'public/images/uploads/' });
+// var upload = multer({ dest: 'public/images/uploads/' });
+var multerS3 = require('multer-s3')
 
 
 const mongo = require('mongodb');
 var db = require('monk')( process.env.MONGODB_URI || 'mongodb://localhost/nodeblog');
+
+var albumBucketName = 'bloggerin';
+var bucketRegion = 'us-east-1';
+var IdentityPoolId = process.env.IDENTITY_POOL_ID;
+
+aws.config.update({
+  region: bucketRegion,
+  credentials: new aws.CognitoIdentityCredentials({
+    IdentityPoolId: IdentityPoolId
+  })
+});
+
+var s3 = new aws.S3({
+  apiVersion: '2006-03-01',
+  params: {Bucket: albumBucketName}
+});
+
+
+
+
+var upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'bloggerin',
+    metadata: function (req, file, cb) {
+      cb(null, {fieldName: file.fieldname});
+    },
+    key: function (req, file, cb) {
+      cb(null, Date.now().toString())
+    }
+  })
+})
 
 
 /* GET posts/show/:id listing. */
@@ -47,7 +82,8 @@ router.post('/add', upload.single('image--upload'), function(req, res, next) {
   var date = new Date();
   console.log(req.file);
   if (req.file) {
-    var mainimage = req.file.filename;
+
+    var mainimage = req.file.key;
   } else {
     var mainimage = 'no-image.jpg';
   }

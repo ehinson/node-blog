@@ -1,3 +1,4 @@
+var aws = require('aws-sdk')
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -6,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const session = require('express-session');
 const multer = require('multer');
+var multerS3 = require('multer-s3')
 const expressValidator = require('express-validator');
 const mongo = require('mongodb');
 var db = require('monk')(process.env.MONGODB_URI || 'mongodb://localhost/nodeblog');
@@ -16,6 +18,29 @@ var posts = require('./routes/posts');
 var categories = require('./routes/categories');
 
 var app = express();
+
+aws.config.update({
+  region: 'us-east-1'
+  // credentials: new AWS.CognitoIdentityCredentials({
+  //   IdentityPoolId: IdentityPoolId
+  // })
+});
+var s3 = new aws.S3({
+  params: {Bucket: 'bloggerin'}
+})
+
+var upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'bloggerin',
+    metadata: function (req, file, cb) {
+      cb(null, {fieldName: file.fieldname});
+    },
+    key: function (req, file, cb) {
+      cb(null, Date.now().toString())
+    }
+  })
+})
 
 app.locals.moment = require('moment');
 app.locals.truncateText = function(text, length){
