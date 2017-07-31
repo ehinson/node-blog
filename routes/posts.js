@@ -118,7 +118,7 @@ router.post('/addcomment', function(req, res, next) {
       var posts = db.get('posts');
       posts.update({ _id: postid }, { $push : {
         "comments": comment
-      }}, (err, res) => {
+      }}, (err, result) => {
         if (err) {
           throw err;
         } else {
