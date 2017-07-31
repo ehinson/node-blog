@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const mongo = require('mongodb');
-var db = require('monk')('mongodb://localhost/nodeblog');
+var db = require('monk')( process.env.MONGODB_URI || 'mongodb://localhost/nodeblog');
 
 
 /* GET categories/add listing. */

@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('mongodb://localhost/nodeblog');
+var db = require('monk')( process.env.MONGODB_URI || 'mongodb://localhost/nodeblog');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
