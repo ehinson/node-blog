@@ -1,0 +1,32 @@
+<form action="/users/register" method="post" enctype="multipart/form-data" class="form form__post">
+  <span class="form__post--label">
+    <label for="name"><span class="form__post--label--content">Name (required) </span></label><br/>
+  <input type="text" name="name" id="name" value="" class="form__post--input" required>
+  </span>
+  <span class="form__post--label">
+    <label for="email"><span class="form__post--label--content">Email (required) </span></label><br/>
+  <input type="email" name="email" id="email" value="" class="form__post--input" required>
+  </span>
+  <span class="form__post--label">
+    <label for="username"><span class="form__post--label--content">Username (required) </span></label><br/>
+  <input type="text" name="username" id="username" value="" class="form__post--input" required>
+  </span>
+  <span class="form__post--label">
+    <label for="password"><span class="form__post--label--content">Password (required) </span></label><br/>
+  <input type="password" name="password" id="password" value="" class="form__post--input" required>
+  </span>
+  <span class="form__post--label">
+    <label for="password__confirmation"><span class="form__post--label--content">Confirm Password (required) </span></label><br/>
+  <input type="password" name="password__confirmation" id="password__confirmation" value="" class="form__post--input" required>
+  </span>
+
+
+<br>
+<span class="form__post--label">
+  <label for="image--upload" class="form__image--upload--label">
+
+<span class="form__post--file--content">Upload Profile Image </span>
+  <input type="file" name="image--upload" id="image--upload" value="" class=" post__file--upload"></span></label>
+  <br><br>
+  <input type="submit" value="Register" class="button post__submit">
+</form>

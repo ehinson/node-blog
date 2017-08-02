@@ -3,17 +3,23 @@
   <i class="fa fa-commenting-o" aria-hidden="true"></i>
   <h1 class="hidden-sm">nodeblog</h2>
   <ul class="hidden-sm">
-    <li><a href="/">Home</a></li>
-    <li><a href="/posts/add">Add Post</a></li>
-    <li><a href="/categories/add">Add Category</a></li>
+    <li><a href="/" class="<%= title ==='Home' ? 'active' : '' %>">Home</a></li>
+  <li><a href="/posts/add">Add Post</a></li>
+  <li><a href="/categories/add">Add Category</a></li>
+  <li><a href="/users/register" class="<%= title ==='Register' ? 'active' :'' %>">Register</a></li>
+<li><a href="/users/login" class="<%= title ==='Login' ? 'active' : ''%>">Login</a></li>
+<li><a href="/users/logout">Logout</a></li>
   </ul>
   <div class="nav-overlay hidden-sm"></div>
 
   <div class="menu__slide hidden-lg">
     <ul class="menu__links">
-      <li><a href="/">Home</a></li>
+        <li><a href="/" class="<%= title ==='Home' ? 'active' : '' %>">Home</a></li>
       <li><a href="/posts/add">Add Post</a></li>
       <li><a href="/categories/add">Add Category</a></li>
+      <li><a href="/users/register" class="<%= title ==='Register' ? 'active' :'' %>">Register</a></li>
+    <li><a href="/users/login" class="<%= title ==='Login' ? 'active' : ''%>">Login</a></li>
+    <li><a href="/users/logout">Logout</a></li>
     </ul>
   </div>
     <i class="fa fa-bars hidden-lg menu__toggle" aria-hidden="true" onclick="show()"></i>
