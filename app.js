@@ -25,22 +25,7 @@ aws.config.update({
   //   IdentityPoolId: IdentityPoolId
   // })
 });
-var s3 = new aws.S3({
-  params: {Bucket: 'bloggerin'}
-})
 
-var upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: 'bloggerin',
-    metadata: function (req, file, cb) {
-      cb(null, {fieldName: file.fieldname});
-    },
-    key: function (req, file, cb) {
-      cb(null, Date.now().toString())
-    }
-  })
-})
 
 app.locals.moment = require('moment');
 app.locals.truncateText = function(text, length){
