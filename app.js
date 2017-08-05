@@ -49,6 +49,10 @@ aws.config.update({
 app.locals.moment = require('moment');
 app.locals.truncateText = function(text, length){
   var truncatedText = text.substr(0, length)
+  if (/^\S/.test(text.substr(n))){
+    return truncatedText.replace(/\s+\S*$/, "");
+  }
+
   return truncatedText;
 }
 
