@@ -59,7 +59,7 @@ router.post('/register', upload.single('avatar__image--upload'), function( req, 
 
 
 bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash("B4c0/\/", salt, function(err, hash) {
+      bcrypt.hash(password, salt, function(err, hash) {
           var newUser =  {
           username: username,
           email: email,
@@ -92,12 +92,11 @@ bcrypt.genSalt(10, function(err, salt) {
   res.redirect('/users/login');
 });
 
-router.get('/login', function(req, res, next) {
-  console.log(req.user);
+router.get('/login', function( req, res, next) {
   res.render('login', { title: 'Login' });
 });
 
-router.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/users/login', failureFlash: 'Invalid password or username' }), function(req, res) {
+router.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/users/login', failureFlash: true }), function(req, res) {
 
   req.flash('success', 'You are now logged in. Welcome Home.');
   res.redirect('/');
@@ -108,6 +107,13 @@ router.get('/logout', function(req, res, next) {
   req.flash('success', 'You are now logged out');
   res.redirect('/users/login');
 });
+
+
+function validPassword(enteredPassword, hash, callback){
+  bcrypt.compare(enteredPassword, hash).then(res => {
+    console.log(res);
+  });
+}
 
 passport.serializeUser(function(user, done) {
   done(null, user._id);
@@ -124,11 +130,13 @@ passport.use(new LocalStrategy(
     users.findOne({ username: username }, function(err, user) {
       if (err) { return done(err); }
       if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
+        return done(null, false, { message: 'Invalid username' });
+
       }
-      // if (!user.validPassword(password)) {
-      //   return done(null, false, { message: 'Incorrect password.' });
-      // }
+      if (!validPassword(password, user.password)){
+
+        return done(null, false, { message: 'Invalid password' });
+      }
       return done(null, user);
     });
   }
