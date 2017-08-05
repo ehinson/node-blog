@@ -8,6 +8,7 @@
       <div class="meta">
       <span class="category"><a href="/categories/show/<%= post.category %>"><%= post.category %></a></span><br>
         <span class="meta__date"><i class="fa fa-calendar-o"></i> <%= moment(post.date).format("DD MMMM ") %></span>
+        <br/><span class="meta__author"> <img src="https://s3.amazonaws.com/bloggerin/<%= author.avatar %>"/></span>
       </div>
       <p class="post__body">
         <%-  JSON.parse(post.body) %>

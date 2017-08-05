@@ -622,6 +622,15 @@ div.form__custom--select.active {
   right: 0;
   top: 0;
 }
+
+.post__container--single .meta__author img{
+  display: block;
+  margin: 15px 0 0 auto;
+  border-radius: 50%;
+  max-width: 50px;
+  height: auto;
+  border:  3px solid rgba(129, 196, 131, 0.5);
+}
 .transform {
 	-webkit-animation: moveFromLeftFade .7s ease both;
 	animation: moveFromLeftFade .7s ease both;

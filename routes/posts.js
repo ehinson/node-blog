@@ -46,14 +46,24 @@ var upload = multer({
 /* GET posts/show/:id listing. */
 router.get('/show/:id', function(req, res, next) {
   var posts = db.get('posts');
+
   posts.findById(req.params.id, (err, post) => {
     if (err) {
       console.error(err);
     } else {
-      res.render('show', {
-        title: 'Add a Post',
-        post: post
-      });
+      db.get('users').findOne({username: post.author}, (err, author) => {
+        if (err){
+          console.log(err);
+        }
+        else {
+          console.log(author);
+          res.render('show', {
+            title: 'Add a Post',
+            post: post,
+            author
+          });
+        }
+      })
     }
   });
 });
