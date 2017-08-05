@@ -91,7 +91,7 @@ bcrypt.genSalt(10, function(err, salt) {
   });
   if (req.file) {
     console.log('Uploading File', req.file);
-    var avatar = req.file.originalname;
+    var avatar = req.file.key;
   } else {
     console.log('No file uploaded');
     var avatar = 'default-avatar.png';
