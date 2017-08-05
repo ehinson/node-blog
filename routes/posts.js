@@ -12,12 +12,12 @@ var db = require('monk')( process.env.MONGODB_URI || 'mongodb://localhost/nodebl
 
 var albumBucketName = 'bloggerin';
 var bucketRegion = 'us-east-1';
-var IdentityPoolId = process.env.IDENTITY_POOL_ID;
+
 
 aws.config.update({
   region: bucketRegion,
   credentials: new aws.CognitoIdentityCredentials({
-    IdentityPoolId: IdentityPoolId
+    IdentityPoolId: 'us-east-1:c01d6ca1-d006-4999-b746-d4e014099cda'
   })
 });
 
@@ -61,16 +61,21 @@ router.get('/show/:id', function(req, res, next) {
 /* GET posts/add listing. */
 router.get('/add', function(req, res, next) {
   var categories = db.get('categories');
-  categories.find({}, {}, (err, cat) => {
-    if (err) {
-      console.error(err);
-    } else {
-      res.render('addpost', {
-        title: 'Add a Post',
-        categories: cat
-      });
-    }
-  });
+  var users = db.get('users').find({}, {}, (err, docs) => {
+    console.log(docs);
+    categories.find({}, {}, (err, cat) => {
+      if (err) {
+        console.error(err);
+      } else {
+        res.render('addpost', {
+          title: 'Add a Post',
+          categories: cat,
+          users: docs
+        });
+      }
+    });
+  })
+
 });
 
 /* POST posts/add listing. */

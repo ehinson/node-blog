@@ -6,6 +6,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const session = require('express-session');
+const passport = require('passport');
+
 const multer = require('multer');
 var multerS3 = require('multer-s3')
 const expressValidator = require('express-validator');
@@ -16,8 +18,25 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var posts = require('./routes/posts');
 var categories = require('./routes/categories');
-
 var app = express();
+
+//Handle Sessions
+app.use(
+  session({
+    secret: 'nyan cat',
+    saveUninitialized: true,
+    resave: true
+  })
+);
+// Passport Middleware
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('*', function(req, res, next) {
+  res.locals.user = req.user || null;
+  next();
+});
 
 aws.config.update({
   region: 'us-east-1'

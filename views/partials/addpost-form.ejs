@@ -33,19 +33,25 @@
   <span  class="form__post--label">
     <label for="author"><span class="form__post--label--content">Author  </span></label><br/>
     <div class="form__custom--select" id="author">
-    <span class="placeholder">Placeholder</span>
+    <span class="placeholder">Choose an author</span>
     <div class="options">
     <ul>
-    			<li data-option data-value="1" class="form__select--selected"><span>Option 1</span></li>
-    			<li data-option data-value="2"><span>Option 2</span></li>
-    			<li data-option data-value="3"><span>Option 3</span></li>
+      <% if (users !== undefined) { %>
+        <% for( user of users){ %>
+    			<li data-option data-value="<%=user.username %>" ><span><%=user.username %></span></li>
+          <%  } %>
+          <%} %>
     		</ul>
         </div>
     <select  name="author" id="author" class="form__post--select">
-      <option  value="" disabled selected>Choose your option</option>
-      <option  value="1">Option 1</option>
-      <option  value="2">Option 2</option>
-      <option  value="3">Option 3</option>
+      <% if (users !== undefined) { %>
+        <% for( user of users){ %>
+          <option value="<%=user.username %>" ><%=user.username %></option>
+          <%  } %>
+          <%} %>
+        </ul>
+        </div>
+
     </select>
     </div>
   </span>
