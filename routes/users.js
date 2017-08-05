@@ -54,9 +54,22 @@ router.post('/register', upload.single('avatar__image--upload'), function( req, 
   var email = req.body.email;
   var username = req.body.username;
   var password = req.body.password;
-  var password2 = req.body.password2;
+  var password2 = req.body.password__confirmation;
+  console.log(password, password2);
 
+  req.checkBody('name', 'Name field is required').notEmpty();
+  req.checkBody('email', 'Valid email is required').notEmpty();
+  req.checkBody('email', 'Valid email is required').isEmail();
+  req.checkBody('password', '6 to 18 characters required in password').len(6, 18);
+  req.checkBody('username', 'Username field is required').notEmpty();
+  req.checkBody('password', 'Password field is required').notEmpty();
+  req.checkBody('password__confirmation', 'Passwords must match').equals(req.body.password);
 
+  req.getValidationResult().then(result => {
+    if (!result.isEmpty()) {
+      console.log(result.array());
+      res.render('register', { title: 'Register', errors: result.array() });
+    } else {
 
 bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(password, salt, function(err, hash) {
@@ -83,13 +96,13 @@ bcrypt.genSalt(10, function(err, salt) {
     console.log('No file uploaded');
     var avatar = 'default-avatar.png';
   }
-  // TODO: hash password with bcryptjs
 
 
-  // res.render('register', { title: 'Register' });
   req.flash('success', 'You are now registered. You can now login.');
   res.location('/users/login');
   res.redirect('/users/login');
+}
+})
 });
 
 router.get('/login', function( req, res, next) {
@@ -97,7 +110,6 @@ router.get('/login', function( req, res, next) {
 });
 
 router.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/users/login', failureFlash: true }), function(req, res) {
-
   req.flash('success', 'You are now logged in. Welcome Home.');
   res.redirect('/');
 });
@@ -110,9 +122,7 @@ router.get('/logout', function(req, res, next) {
 
 
 function validPassword(enteredPassword, hash, callback){
-  bcrypt.compare(enteredPassword, hash).then(res => {
-    console.log(res);
-  });
+
 }
 
 passport.serializeUser(function(user, done) {
@@ -128,16 +138,23 @@ passport.deserializeUser(function(id, done) {
 passport.use(new LocalStrategy(
   function(username, password, done) {
     users.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
+
+      if (err) { console.log(err); return done(err); }
       if (!user) {
         return done(null, false, { message: 'Invalid username' });
 
       }
-      if (!validPassword(password, user.password)){
 
-        return done(null, false, { message: 'Invalid password' });
-      }
-      return done(null, user);
+      bcrypt.compare(password, user.password).then(res => {
+        if (res){
+          return done(null, user);
+        }
+        else {
+          return done(null, false, { message: 'Invalid password' });
+        }
+      })
+
+
     });
   }
 ));
