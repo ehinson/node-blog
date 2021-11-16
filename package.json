@@ -6,7 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "aws-sdk": "^2.92.0",
+    "aws-sdk": "^2.814.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "~1.17.1",
     "connect-flash": "^0.1.1",
