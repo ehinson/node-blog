@@ -18,7 +18,7 @@
     "express-session": "^1.15.4",
     "express-validator": "^3.2.1",
     "html-truncate": "^1.2.2",
-    "moment": "^2.18.1",
+    "moment": "^2.29.4",
     "mongodb": "^2.2.30",
     "monk": "https://github.com/vccabral/monk.git",
     "morgan": "~1.8.1",
